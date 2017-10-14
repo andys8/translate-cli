@@ -26,6 +26,7 @@ executable translate-cli-exe
   build-depends:       base
                      , translate-cli
                      , turtle
+                     , text
   default-language:    Haskell2010
 
 test-suite translate-cli-test

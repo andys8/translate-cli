@@ -1,6 +1,7 @@
 module Lib
-    ( someFunc
+    ( translateText
     ) where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+translateText :: String -> IO()
+translateText = putStrLn
+
