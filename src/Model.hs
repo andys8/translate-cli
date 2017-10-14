@@ -1,5 +1,5 @@
 {-# LANGUAGE DeriveGeneric, OverloadedStrings #-}
-module Model(RestResponse, Translation, Phrase, toPhrases) where
+module Model(RestResponse(..), Translation(..), Phrase(..), toPhrases) where
 
 import Data.Text (Text)
 import GHC.Generics (Generic)
