@@ -2,6 +2,10 @@
 
 Command Line Interface to translate words
 
+## Initial setup
+
+`stack setup`
+
 ## Build
 
 `stack build`
@@ -10,3 +14,4 @@ Command Line Interface to translate words
 
 * `stack exec translate` to show help
 * `stack exec translate -- <text-to-translate>` to translate
+* or execute binary
