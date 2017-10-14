@@ -1,19 +1,29 @@
 {-# LANGUAGE DeriveGeneric, OverloadedStrings #-}
-module Model(RestResponse, RestResult, RestPhrase) where
+module Model(RestResponse, Translation, Phrase, toPhrases) where
 
 import Data.Text (Text)
 import GHC.Generics (Generic)
+import Data.Maybe
 
-
-data RestPhrase = RestPhrase { text :: String
+data Phrase = Phrase { text :: String
                              , language :: String
                              } deriving (Generic, Show)
 
-data RestResult = RestResult { phrase :: Maybe RestPhrase
+data Translation = Translation { phrase :: Maybe Phrase
                              } deriving (Generic, Show)
 
 data RestResponse = RestResponse { result :: String
-                                 , tuc :: [RestResult]
+                                 , tuc :: [Translation]
                                  } deriving (Generic, Show)
 
+toPhrases :: RestResponse -> [String]
+toPhrases response = fmap formatPhrase $ getPhrases $ getTranslations response
 
+getTranslations :: RestResponse -> [Translation]
+getTranslations response = tuc response
+
+getPhrases :: [Translation] -> [Phrase]
+getPhrases results = catMaybes $ fmap phrase results
+
+formatPhrase :: Phrase -> String
+formatPhrase (Phrase text lang) = "[" ++ lang ++ "] " ++ text

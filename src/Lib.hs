@@ -1,44 +1,38 @@
 {-# LANGUAGE DeriveGeneric, OverloadedStrings, ScopedTypeVariables #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 
 module Lib(translateText) where
 
 import Network.Wreq
-import Control.Lens ((&), (^.), (^?), (.~), (^..))
+import Control.Lens ((&), (^.), (.~))
 import Data.Text (Text, pack)
 import GHC.Generics (Generic)
-import Data.Aeson 
-import Data.Aeson.Lens (key)
+import Data.Aeson
 
 import Model
 
-instance FromJSON RestPhrase
-instance FromJSON RestResult
+instance FromJSON Phrase
+instance FromJSON Translation
 instance FromJSON RestResponse
 
 translateText :: String -> IO()
 translateText phrase = do
     r <- getWith (getOptions phrase) $ apiBase
-    let dr = eitherDecode (r ^. responseBody) :: Either String RestResponse
-    print dr
+    let decoded = eitherDecode (r ^. responseBody) :: Either String RestResponse
+    printPhrases $ fmap (take 5 . toPhrases) decoded
 
 apiBase :: String
 apiBase = "https://glosbe.com/gapi_v0_1/translate"
 
---doRequest = do
---    r <- get $ apiBase ++ requestParams
---    putStrLn $ show $ r ^. responseBody
-
-requestParams :: String
-requestParams = "?from=de&dest=eng&format=json&phrase=haus"
-
-
 getOptions :: String -> Options
-getOptions phrase =
-    let phraseText = pack phrase
-    in defaults
-        & param "phrase" .~ [phraseText]
-        & param "from" .~ ["de"]
-        & param "dest" .~ ["en"]
-        & param "format" .~ ["json"]
+getOptions phrase = defaults
+    & param "phrase" .~ [pack phrase]
+    & param "from" .~ ["de"]
+    & param "dest" .~ ["en"]
+    & param "format" .~ ["json"]
+
+printPhrases :: Either String [String] -> IO()
+printPhrases phrases =
+    case phrases of
+        Left _ -> print "No result"
+        Right phrases -> mapM_ putStrLn phrases
 
