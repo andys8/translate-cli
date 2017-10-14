@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+
 module Main where
 
 import Turtle
@@ -20,8 +21,12 @@ parseVersion :: Parser (IO ())
 parseVersion =
     (subcommand "version" "Show version information" (pure version'))
 
+parsePrint :: Parser (IO ())
+parsePrint = fmap printText
+    (subcommand "print" "Print specified text specified number of times" printArgs)
+
 parser :: Parser (IO ())
-parser = parseMain <|> parseVersion
+parser = parseMain <|> parseVersion <|> parsePrint
 
 main :: IO ()
 main = do
@@ -31,3 +36,10 @@ main = do
 version' :: IO()
 version' = putStrLn (showVersion version)
 
+printText :: (Maybe Int, Text) -> IO()
+printText (Nothing, text) = echo $ unsafeTextToLine text
+printText ((Just i), text) = replicateM_ i (echo $ unsafeTextToLine text)
+
+printArgs :: Parser (Maybe Int, Text)
+printArgs = (,) <$> optional (optInt "times" 'n' "Number of times")
+                <*> (argText "text" "Text to print")
