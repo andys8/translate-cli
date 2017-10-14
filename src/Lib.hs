@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveGeneric, OverloadedStrings, ScopedTypeVariables #-}
+{-# LANGUAGE OverloadedStrings, ScopedTypeVariables #-}
 
 module Lib(translateText) where
 
@@ -17,7 +17,8 @@ instance FromJSON RestResponse
 translateText :: String -> IO()
 translateText phrase = do
     r <- getWith (getOptions phrase) $ apiBase
-    let decoded = eitherDecode (r ^. responseBody) :: Either String RestResponse
+    let body = r ^. responseBody
+        decoded = eitherDecode body :: Either String RestResponse
     printPhrases $ fmap (take 5 . toPhrases) decoded
 
 apiBase :: String
