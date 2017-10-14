@@ -1,7 +1,7 @@
 name:                translate-cli
 version:             0.1.0.0
--- synopsis:
--- description:
+synopsis:            Translation cli tool
+description:         Translation cli tool
 homepage:            https://github.com/andys8/translate-cli#readme
 license:             MIT
 license-file:        LICENSE
