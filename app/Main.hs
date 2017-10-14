@@ -16,7 +16,7 @@ parseMain :: Parser (IO ())
 parseMain = fmap (translateText . unpack) parseArgs
 
 parser :: Parser (IO ())
-parser = parseMain <|> parseVersion
+parser = parseVersion <|> parseMain
 
 main :: IO ()
 main = do
