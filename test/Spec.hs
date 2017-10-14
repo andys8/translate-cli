@@ -24,7 +24,7 @@ enPhrase1 = Phrase "cat" "en"
 enPhrase2 = Phrase "dog" "en"
 
 response1 = RestResponse "ok" ([]::[Translation])
-response2 = RestResponse "ok" ([translation1, translation2])
+response2 = RestResponse "ok" [translation1, translation2]
 
 translation1 = Translation (Just enPhrase1)
 translation2 = Translation (Just enPhrase2)

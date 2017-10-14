@@ -16,7 +16,7 @@ instance FromJSON RestResponse
 
 translateText :: String -> IO()
 translateText phrase = do
-    r <- getWith (getOptions phrase) $ apiBase
+    r <- getWith (getOptions phrase) apiBase
     let body = r ^. responseBody
         decoded = eitherDecode body :: Either String RestResponse
     printPhrases $ fmap (take 5 . toPhrases) decoded

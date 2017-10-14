@@ -10,7 +10,7 @@ data Phrase = Phrase { text :: String
                      , language :: String
                      } deriving (Generic, Show)
 
-data Translation = Translation { phrase :: Maybe Phrase
+newtype Translation = Translation { phrase :: Maybe Phrase
                                } deriving (Generic, Show)
 
 data RestResponse = RestResponse { result :: String

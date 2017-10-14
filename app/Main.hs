@@ -19,9 +19,7 @@ parser :: Parser (IO ())
 parser = parseVersion <|> parseMain
 
 main :: IO ()
-main = do
-    cmd <- options "Translation tool for the commandline" parser
-    cmd
+main = join (options "Translation tool for the commandline" parser)
 
 printVersion :: IO()
 printVersion = putStrLn $ showVersion version
