@@ -19,7 +19,7 @@ parser :: Parser (IO ())
 parser = parseVersion <|> parseMain
 
 main :: IO ()
-main = join (options "Translation tool for the commandline" parser)
+main = join (options "Translation tool for the commandline using glosbe api" parser)
 
 printVersion :: IO()
 printVersion = putStrLn $ showVersion version
