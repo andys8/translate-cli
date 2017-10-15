@@ -12,7 +12,7 @@ testToPhrasesEmptyList = TestCase
 testToPhrasesWithResponse :: Test
 testToPhrasesWithResponse = TestCase
     $ assertEqual "Should return empty list if no input"
-        ["[en] cat", "[en] dog"]
+        ["\ESC[32m[en]\ESC[0m cat","\ESC[32m[en]\ESC[0m dog"]
         (toPhrases response2)
 
 main :: IO Counts
