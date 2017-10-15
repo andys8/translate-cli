@@ -1,0 +1,29 @@
+{
+  "name": "@andys8/translate-cli",
+  "version": "1.0.2",
+  "description": "Translation command line tool",
+  "preferGlobal": true,
+  "author": "andys8",
+  "main": "index.js",
+  "scripts": {
+    "install": "binwrap-install",
+    "test": "binwrap-test",
+    "prepare": "npm test"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "bin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andys8/translate-cli.git"
+  },
+  "homepage": "https://github.com/andys8/translate-cli",
+  "bin": {
+    "translate": "bin/translate"
+  },
+  "dependencies": {
+    "binwrap": "0.1.4"
+  }
+}
