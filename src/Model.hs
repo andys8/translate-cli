@@ -24,4 +24,18 @@ getPhrases :: [Translation] -> [Phrase]
 getPhrases = catMaybes . fmap phrase
 
 formatPhrase :: Phrase -> String
-formatPhrase (Phrase text lang) = "[" ++ lang ++ "] " ++ text
+formatPhrase (Phrase text lang) =
+    "\x1b["
+    ++ show (colorCode lang)
+    ++ "m["
+    ++ lang
+    ++ "]\x1b[0m "
+    ++ text
+
+
+colorCode lang =
+    case lang of
+        "en" -> 32
+        "de" -> 33
+        _    -> 34
+
