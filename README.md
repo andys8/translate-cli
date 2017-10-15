@@ -12,6 +12,20 @@ Command Line Interface to translate words
 
 ## Run
 
-* `stack exec translate` to show help
+### Binary
+
+* Download
+    * [Linux](https://github.com/andys8/translate-cli/raw/master/bin/x86_64-linux/translate)
+    * [OSX](https://github.com/andys8/translate-cli/raw/master/bin/x86_64-osx/translate)
+* Add to `PATH`
+* `translate dog`
+
+### Build rom sources
+
+* Setup stack
 * `stack exec translate -- <text-to-translate>` to translate
-* or execute binary
+
+
+## Credits
+
+[Glosbe API](https://de.glosbe.com/a-api) is used for translation.
