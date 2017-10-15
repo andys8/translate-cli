@@ -10,25 +10,37 @@ import Data.Aeson
 
 import Model
 
+data Language = DeEn | EnDe
+
 instance FromJSON Phrase
 instance FromJSON Translation
 instance FromJSON RestResponse
 
 translateText :: String -> IO()
 translateText phrase = do
-    r <- getWith (getOptions phrase) apiBase
-    let body = r ^. responseBody
-        decoded = eitherDecode body :: Either String RestResponse
-    printPhrases $ fmap (take 5 . toPhrases) decoded
+    doRequest $ getLangOptions DeEn phrase
+    doRequest $ getLangOptions EnDe phrase
 
 apiBase :: String
 apiBase = "https://glosbe.com/gapi_v0_1/translate"
 
-getOptions :: String -> Options
-getOptions phrase = defaults
+doRequest :: Options -> IO()
+doRequest options = do
+    r <- getWith options apiBase
+    let body = r ^. responseBody
+        decoded = eitherDecode body :: Either String RestResponse
+    printPhrases $ fmap (take 5 . toPhrases) decoded
+
+getLangOptions :: Language -> String ->  Options
+getLangOptions lang phrase =
+    let (from, dest) =
+            case lang of
+                DeEn -> ("deu", "eng")
+                EnDe -> ("eng", "deu")
+    in defaults
     & param "phrase" .~ [pack phrase]
-    & param "from" .~ ["de"]
-    & param "dest" .~ ["en"]
+    & param "from" .~ [from]
+    & param "dest" .~ [dest]
     & param "format" .~ ["json"]
 
 printPhrases :: Either String [String] -> IO()
