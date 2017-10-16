@@ -1,6 +1,6 @@
 {
   "name": "@andys8/translate-cli",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "description": "Translation command line tool",
   "preferGlobal": true,
   "author": "andys8",
@@ -14,7 +14,7 @@
   "license": "MIT",
   "files": [
     "index.js",
-    "bin"
+    "bin/translate"
   ],
   "repository": {
     "type": "git",
