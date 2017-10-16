@@ -1,12 +1,13 @@
 {
   "name": "@andys8/translate-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Translation command line tool",
   "preferGlobal": true,
   "author": "andys8",
   "main": "index.js",
   "scripts": {
     "install": "binwrap-install",
+    "build:linux": "stack clean && stack build && tar -czvf ./bin/x86_64-linux/translate.tgz ./.stack-work/install/x86_64-linux/*/*/bin/translate",
     "test": "binwrap-test",
     "prepare": "npm test"
   },
