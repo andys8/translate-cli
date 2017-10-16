@@ -1,5 +1,5 @@
 name:                translate-cli
-version:             1.0.0.0
+version:             1.0.1.0
 synopsis:            Translation cli tool
 description:         Translation cli tool
 homepage:            https://github.com/andys8/translate-cli#readme
@@ -28,7 +28,7 @@ library
 executable translate
   hs-source-dirs:      app
   main-is:             Main.hs
-  ghc-options:         -threaded -dynamic -rtsopts -with-rtsopts=-N
+  ghc-options:         -threaded -O2 -rtsopts -with-rtsopts=-N
   build-depends:       base
                      , translate-cli
                      , turtle
